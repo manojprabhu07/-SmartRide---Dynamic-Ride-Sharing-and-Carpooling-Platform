@@ -1,9 +1,8 @@
 # 🚗 SmartRide - Dynamic Ride Sharing and Carpooling Platform
 
-**Developer:** Debmalya Pan  
-**Branch:** `main` (merged from `DebmalyaPan`)  
+**Developer:** S Manoj Prabhu
+**Branch:** `main` (merged from `S Manoj prabhu`)  
 **Program:** Springboard Internship 2025 - September Batch 3  
-**Repository:** [GitHub - Springboard-Internship-2025](https://github.com/Springboard-Internship-2025/Development-of-a-Dynamic-Ride-Sharing-and-Carpooling-Platform_September_Batch-3_2025)
 
 ---
 
