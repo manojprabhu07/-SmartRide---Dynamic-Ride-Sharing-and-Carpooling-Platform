@@ -1,0 +1,73 @@
+# IDE specific files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Dependencies
+node_modules/
+/dist/
+/build/
+/out/
+**/node_modules/
+client/node_modules/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Configuration files with sensitive data
+**/application.properties
+Ride-Sharing/src/main/resources/application.properties
+application.properties
+**/application-*.properties
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Compiled output
+*.class
+*.jar
+/target/
+**/target/
+Ride-Sharing/target/
+/bin/
+
+# Package files
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Cache and temp files
+.cache/
+temp/
+tmp/
+*.tmp
+
+# Testing
+/coverage/
+.nyc_output/
+
+# Build files
+*.tsbuildinfo
+
+# Misc
+.eslintcache
+*.swp
+*.bak
+*.orig
