@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ride Reminder - SmartRide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .header .icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        .content {
+            padding: 30px;
+        }
+        .reminder-alert {
+            background-color: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 16px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+        .reminder-alert h3 {
+            margin: 0 0 8px 0;
+            color: #92400e;
+            font-size: 18px;
+        }
+        .reminder-alert p {
+            margin: 0;
+            color: #78350f;
+        }
+        .ride-details {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .ride-details h3 {
+            margin: 0 0 15px 0;
+            color: #1f2937;
+            font-size: 18px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 8px;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        .detail-label {
+            font-weight: 600;
+            color: #4b5563;
+        }
+        .detail-value {
+            color: #1f2937;
+            text-align: right;
+        }
+        .driver-info {
+            background-color: #f0f9ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .driver-info h3 {
+            margin: 0 0 15px 0;
+            color: #0c4a6e;
+            font-size: 18px;
+        }
+        .contact-button {
+            background-color: #3b82f6;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 0;
+            font-weight: 500;
+        }
+        .footer {
+            background-color: #1f2937;
+            color: #9ca3af;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        .footer a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+        @media (max-width: 600px) {
+            .container {
+                margin: 0;
+                border-radius: 0;
+            }
+            .detail-row {
+                flex-direction: column;
+            }
+            .detail-value {
+                text-align: left;
+                margin-top: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="icon">🚗</div>
+            <h1>Ride Reminder</h1>
+            <p>SmartRide</p>
+        </div>
+        
+        <div class="content">
+            <p>Dear <span th:text="${passengerName}">Passenger Name</span>,</p>
+            
+            <div class="reminder-alert">
+                <h3>⏰ Ride Starting Soon!</h3>
+                <p th:text="${message}">Your ride is starting soon. Please be ready!</p>
+            </div>
+            
+            <div class="ride-details">
+                <h3>🚗 Ride Details</h3>
+                <div class="detail-row">
+                    <span class="detail-label">From:</span>
+                    <span class="detail-value" th:text="${source}">Source Location</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">To:</span>
+                    <span class="detail-value" th:text="${destination}">Destination Location</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Date:</span>
+                    <span class="detail-value" th:text="${departureDate}">Departure Date</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Time:</span>
+                    <span class="detail-value" th:text="${departureTime}">Departure Time</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Seats Booked:</span>
+                    <span class="detail-value" th:text="${seatsBooked}">Number of Seats</span>
+                </div>
+            </div>
+            
+            <div class="driver-info">
+                <h3>👤 Driver Information</h3>
+                <div class="detail-row">
+                    <span class="detail-label">Driver Name:</span>
+                    <span class="detail-value" th:text="${driverName}">Driver Name</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Phone:</span>
+                    <span class="detail-value" th:text="${driverPhone}">Driver Phone</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Vehicle:</span>
+                    <span class="detail-value" th:text="${vehicleInfo}">Vehicle Information</span>
+                </div>
+                <a th:href="'tel:' + ${driverPhone}" class="contact-button">📞 Contact Driver</a>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <p><strong>Important Reminders:</strong></p>
+                <ul style="text-align: left; display: inline-block;">
+                    <li>Please be ready 10 minutes before departure time</li>
+                    <li>Carry a valid ID for verification</li>
+                    <li>Contact the driver if you're running late</li>
+                    <li>Follow COVID-19 safety protocols</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; <span th:text="${currentYear}">2024</span> SmartRide. All rights reserved.</p>
+            <p>
+                Need help? Contact us at 
+                <a th:href="'mailto:' + ${supportEmail}" th:text="${supportEmail}">support@smartride.com</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

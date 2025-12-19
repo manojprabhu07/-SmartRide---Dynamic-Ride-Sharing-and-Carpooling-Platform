@@ -1,0 +1,47 @@
+spring.application.name=Ride-Sharing
+
+# Database Configuration
+spring.datasource.url=jdbc:mysql://localhost:3306/Ride_Sharing?createDatabaseIfNotExist=true
+spring.datasource.username=your-db-username
+spring.datasource.password=your-db-password
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# JPA Configuration
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+# JWT Configuration
+jwt.secret=your-jwt-secret-key-here
+jwt.expiration=86400000
+jwt.refreshExpiration=604800000
+
+# Twilio Configuration (Replace with your actual credentials)
+twilio.accountSid=your-twilio-account-sid
+twilio.authToken=your-twilio-auth-token
+twilio.fromNumber=your-twilio-phone-number
+
+# Development Settings
+app.mock-otp=true
+
+# Server Configuration
+server.port=8080
+
+# Logging
+logging.level.com.ridesharing=DEBUG
+logging.level.org.springframework.security=DEBUG
+
+# Email Configuration (SMTP)
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=your-email@gmail.com
+spring.mail.password=your-16-character-app-password
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+spring.mail.properties.mail.smtp.starttls.required=true
+spring.mail.properties.mail.smtp.ssl.protocols=TLSv1.2
+
+# Email Settings
+app.email.from=SmartRide <your-email@gmail.com>
+app.email.support=support@smartride.com

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Status Update - SmartRide</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #FCD34D;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #F59E0B;
+            margin-bottom: 10px;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        .booking-details {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .detail-label {
+            font-weight: bold;
+            color: #495057;
+        }
+        .detail-value {
+            color: #212529;
+        }
+        .ride-info {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .status-info {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        .support-text {
+            margin-top: 20px;
+            text-align: center;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🚗 SmartRide</div>
+            <h2>Booking Status Update</h2>
+        </div>
+
+        <div style="text-align: center;">
+            <div class="status-badge" th:style="'background-color: ' + ${statusColor}" th:text="${status}">
+                STATUS UPDATE
+            </div>
+        </div>
+
+        <p>Dear <span th:text="${passengerName}">Passenger</span>,</p>
+        
+        <p th:text="${statusMessage}">Your booking status has been updated.</p>
+
+        <div class="booking-details">
+            <h3 style="margin-top: 0; color: #F59E0B;">📋 Booking Information</h3>
+            <div class="detail-row">
+                <span class="detail-label">Booking ID:</span>
+                <span class="detail-value" th:text="${bookingId}">#12345</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Current Status:</span>
+                <span class="detail-value" style="font-weight: bold;" th:text="${status}" th:style="'color: ' + ${statusColor}">CONFIRMED</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Booking Date:</span>
+                <span class="detail-value" th:text="${bookingDate}">25 Sep 2024, 02:30 PM</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Seats Booked:</span>
+                <span class="detail-value" th:text="${seatsBooked}">2</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Total Amount:</span>
+                <span class="detail-value" style="font-weight: bold;" th:text="${totalAmount}">₹500.00</span>
+            </div>
+        </div>
+
+        <div class="ride-info">
+            <h3 style="margin-top: 0; color: #F59E0B;">🚗 Ride Details</h3>
+            <div class="detail-row">
+                <span class="detail-label">From:</span>
+                <span class="detail-value" th:text="${source}">Mumbai</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">To:</span>
+                <span class="detail-value" th:text="${destination}">Pune</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Departure:</span>
+                <span class="detail-value" th:text="${departureDate + ' at ' + departureTime}">26 Sep 2024 at 08:00 AM</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Driver:</span>
+                <span class="detail-value" th:text="${driverName}">John Doe</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Contact:</span>
+                <span class="detail-value" th:text="${driverPhone}">+91 9876543210</span>
+            </div>
+        </div>
+
+        <div class="status-info" th:style="'background-color: ' + ${statusColor} + '20; border-color: ' + ${statusColor}">
+            <h3 style="margin-top: 0;" th:style="'color: ' + ${statusColor}">📱 Next Steps</h3>
+            <div th:switch="${status}">
+                <div th:case="'CONFIRMED'">
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li>Be ready at the pickup location 10 minutes before departure</li>
+                        <li>Contact the driver if you need any assistance</li>
+                        <li>Carry a valid ID for verification</li>
+                    </ul>
+                </div>
+                <div th:case="'CANCELLED'">
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li>Search for alternative rides</li>
+                        <li>No charges applied to your account</li>
+                        <li>Refund will be processed if applicable</li>
+                    </ul>
+                </div>
+                <div th:case="'COMPLETED'">
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li>Thank you for traveling with SmartRide!</li>
+                        <li>Please rate your experience in the app</li>
+                        <li>Check your ride history for receipt</li>
+                    </ul>
+                </div>
+                <div th:case="'PENDING'">
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li>Waiting for driver confirmation</li>
+                        <li>You will be notified once confirmed</li>
+                        <li>You can cancel if needed</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="support-text">
+            <p>If you have any questions or need assistance, please contact our support team at 
+               <a th:href="'mailto:' + ${supportEmail}" th:text="${supportEmail}">support@smartride.com</a>
+            </p>
+        </div>
+
+        <div class="footer">
+            <p>Thank you for choosing SmartRide!</p>
+            <p>© <span th:text="${currentYear}">2024</span> SmartRide. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
